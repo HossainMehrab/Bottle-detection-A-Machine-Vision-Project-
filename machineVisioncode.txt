@@ -1,0 +1,56 @@
+clc;
+clear all;
+close all;
+image_folder='C:\Users\MEHRAB\Documents\MATLAB\project';
+filenames=dir(fullfile(image_folder, '*.png'));
+total_image=numel(filenames);
+
+for i=1:total_image
+    f=fullfile(image_folder, filenames(i).name);
+    a=imread(f); %Gray Image
+%     a=im2bw(a1);
+%     a3=~a2;
+%     a=imclearborder(a3);
+%    [labeledImage, numberOfCircles] = bwlabel(a)
+    
+%     cc=bwconncomp(a)
+%     n1(i)=cc.NumObjects
+
+    %     length(n1(i))
+   
+    
+    figure(i)
+    imshow(a)
+    
+    Rmin = 13;   %13
+    Rmax = 150;  %1500
+    [centersBright, radiiBright] = imfindcircles(a,[Rmin Rmax],'ObjectPolarity','bright')
+    
+    Yes1=size(radiiBright)
+    Yes2=Yes1(:,1)
+    Yes3(i)=Yes2
+    
+%     [centersDark, radiiDark] = imfindcircles(a,[Rmin Rmax],'ObjectPolarity','dark');
+   
+%     title(['Number of Circle ' num2str(viscircles(centersBright, radiiBright,'Color','b'))]) 
+    
+
+    title(['Number of Circle ' num2str(Yes3(i))])
+
+    hold on 
+    h=viscircles(centersBright, radiiBright,'Color','b')
+    hold off  
+   
+    
+%     hold on
+%     viscircles(centersDark, radiiDark,'Color','r');
+%     hold off
+    
+    
+% https://se.mathworks.com/help/images/detect-and-measure-circular-objects-in-an-image.html
+
+end
+
+    
+
+
